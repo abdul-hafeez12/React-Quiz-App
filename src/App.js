@@ -1,0 +1,57 @@
+import React,{useState} from  'react'
+import Card from  'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Option from './Option';
+import QuizData from './questions.json';
+
+function App() {
+
+  const [questions,setQuestions]=useState(QuizData);
+  const [count,setCount] =useState(0);
+
+  
+
+  const incrementcount = () =>
+  {
+    if(count<4){
+
+      setCount(count+1);
+    }
+  }
+
+  const decrementcount = () =>
+  {
+    if(count>0){
+
+      setCount(count-1);
+    }
+  }
+  return (
+    <div>
+
+      {
+
+      }
+      <Card>
+        <Card.Header className="text-center"><h1>Quiz</h1></Card.Header>
+        <Card.Body>
+          <Card.Title>{questions[count].id}. {questions[count].question}</Card.Title>
+          <Card.Text>
+          <Form.Group>
+          {
+            Object.values(questions[count].options[0]).map((item) => <Option text={item} />)
+
+          }
+          </Form.Group>
+          </Card.Text>
+          <Button variant="success" className="mr-2" onClick={decrementcount}>Previous</Button>
+          <Button variant="success" onClick={incrementcount} >Next</Button>
+        </Card.Body>
+        <Card.Footer className="text-muted">Total Questions: {count+1}/5</Card.Footer>
+      </Card>
+    </div>
+  );
+}
+
+export default App;
